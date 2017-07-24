@@ -29,7 +29,9 @@ public class md5{
 	public static void main(String[] args) throws 
 	NoSuchAlgorithmException, IOException{
 		System.out.println("Enter The String:-");
-		BufferReader br = new BufferReader(new InputSt)
+		BufferReader br = new BufferReader(new InputStreamReader(System.in));
+		String text1 = br.readLine();
+		System.out.println("Hash Value" +getMD5("text1"));
 		
 	}
 	
