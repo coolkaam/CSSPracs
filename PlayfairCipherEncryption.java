@@ -216,6 +216,58 @@ public class PlayfairCipherEncryption
         return Code;
     }        
 
+        public String decryptMessage(String Code)
+
+    {
+        String Original = new String();
+        String src_arr[] = Divid2Pairs(Code);
+        char one;
+        char two;
+        int part1[] = new int[2];
+        int part2[] = new int[2];
+        for (int i = 0; i < src_arr.length; i++)
+        {
+            one = src_arr[i].charAt(0);
+            two = src_arr[i].charAt(1);
+            part1 = GetDiminsions(one);
+            part2 = GetDiminsions(two);
+            if (part1[0] == part2[0])
+            {
+                if (part1[1] > 0)
+                    part1[1]--;
+                else
+                    part1[1] = 4;
+                if (part2[1] > 0)
+                    part2[1]--;
+                else
+                    part2[1] = 4;
+            }
+
+            else if (part1[1] == part2[1])
+            {
+                if (part1[0] > 0)
+                    part1[0]--;
+                else
+                    part1[0] = 4;
+                if (part2[0] > 0)
+                    part2[0]--;
+                else
+                    part2[0] = 4;
+            }
+
+            else
+            {
+                int temp = part1[1];
+                part1[1] = part2[1];
+                part2[1] = temp;
+            }
+
+            Original = Original + keymatrix[part1[0]][part1[1]] + keymatrix[part2[0]][part2[1]];
+        }
+
+        return Original;
+    }
+
  
     public static void main(String args[])
     {
@@ -227,6 +279,7 @@ public class PlayfairCipherEncryption
        System.out.println("Enter word to encrypt: ");
        String inputkey = sc.next();
        System.out.println("Encryption: " + x.encryptmessage(inputkey));  
+       System.out.println("Decryption: " + x.decryptMessage(x.encryptmessage(inputkey)));
         sc.close();
     }
 
